@@ -41,6 +41,7 @@ Command available are
   - zsh : Install zsh dotfiles.
   - tmux : Install tmux dotfiles.
   - tmuxifier : Install tmux-layouts dotfiles.
+  - vim : Install vim files
 EOF
 }
 
@@ -142,6 +143,7 @@ while [ $# -gt 0 ]; do
         installDotfile ".zshenv"
         installDotfile ".tmux.conf"
         installDotfile ".tmux-layouts"
+        installDotfile ".vimrc"
         ;;
     git)
         installDotfile ".gitconfig"
@@ -158,6 +160,10 @@ while [ $# -gt 0 ]; do
         ;;
     tmuxifier)
         installDotfile ".tmux-layouts"
+        ;;
+    vim)
+        installDotfile ".vimrc"
+        installDotfile ".vim"
         ;;
     *)
         echo "Unknown argument : $1" 1>&2
