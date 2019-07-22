@@ -8,6 +8,7 @@
         # Shortcuts
         st = status
         cm = commit -m
+        cma = commit -a -m
         co = checkout
         br = branch
         ls = ls-files
@@ -29,3 +30,5 @@
         pager = less --tabs=4 -RFX
 [push]
         default = matching
+[credential]
+	helper = cache --timeout=3600
