@@ -139,6 +139,7 @@ while [ $# -gt 0 ]; do
         ;;
     all)
         installDotfile ".gitconfig"
+        installDotfile ".gitignore_global"
         installDotfile ".zshrc"
         installDotfile ".zshenv"
         installDotfile ".tmux.conf"
@@ -147,6 +148,7 @@ while [ $# -gt 0 ]; do
         ;;
     git)
         installDotfile ".gitconfig"
+        installDotfile ".gitignore_global"
         ;;
     ssh)
         installDotfile ".ssh/config"
