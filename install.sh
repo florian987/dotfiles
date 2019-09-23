@@ -40,7 +40,7 @@ Command available are
   - ssh : Install ssh dotfiles.
   - zsh : Install zsh dotfiles.
   - tmux : Install tmux dotfiles.
-  - tmuxifier : Install tmux-layouts dotfiles.
+  - tmuxinator : Install tmuxinator files.
   - vim : Install vim files
 EOF
 }
@@ -143,7 +143,7 @@ while [ $# -gt 0 ]; do
         installDotfile ".zshrc"
         installDotfile ".zshenv"
         installDotfile ".tmux.conf"
-        installDotfile ".tmux-layouts"
+        installDotfile ".tmuxinator"
         installDotfile ".vimrc"
         ;;
     git)
@@ -160,8 +160,8 @@ while [ $# -gt 0 ]; do
     tmux)
         installDotfile ".tmux.conf"
         ;;
-    tmuxifier)
-        installDotfile ".tmux-layouts"
+    tmuxinator)
+        installDotfile ".tmuxinator"
         ;;
     vim)
         installDotfile ".vimrc"
