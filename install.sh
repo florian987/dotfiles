@@ -145,6 +145,7 @@ while [ $# -gt 0 ]; do
         installDotfile ".tmux.conf"
         installDotfile ".tmuxinator"
         installDotfile ".vimrc"
+        installDotfile ".vim"
         ;;
     git)
         installDotfile ".gitconfig"
