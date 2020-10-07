@@ -18,6 +18,8 @@
         undo = reset --soft HEAD~1
         # Remove file(s) from Git but not from disk
         untrack = rm --cache --
+        # remove merged branches
+        cleanup = "!git branch --merged | grep -v -P '^\\*|master|develop' | xargs -n1 -r git branch -d"
 [color]
         # Enable colors in color-supporting terminals
         ui = auto
