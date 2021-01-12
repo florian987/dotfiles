@@ -1,36 +1,95 @@
 [user]
-        # These values are set in ~/.gitconfig_local
+        # These values must be set in ~/.gitconfig_local
+
 [include]
         path = ~/.gitconfig_local
+
 [alias]
         # List available aliases
-        aliases = !git config --get-regexp alias | sed -re 's/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g'
-        # Shortcuts
+        alias = !git config --get-regexp alias | sed -re 's/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g'
+
+        # View the current working tree status using the short format
+        s = status -s
+
+        # View the current working tree status
         st = status
-        cm = commit -m
-        cma = commit -am
+
+        # Checkout
         co = checkout
-        br = branch
-        ls = ls-files
-        # Display tree-like log
-        lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset'
+
+        # Commit
+        cm = commit -m
+
+        # Commit all changes
+	ca = !git add -A && git commit -av
+
+        # Amend the currently staged files to the latest commit
+	amend = commit --amend --reuse-message=HEAD
+
         # Undo last commit but keep changed files in stage
         undo = reset --soft HEAD~1
-        # Remove file(s) from Git but not from disk
-        untrack = rm --cache --
-        # remove merged branches
+
+        # View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+        
+        # Display tree-like log
+        lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+
+        # Color graph log view
+	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+
+        # Show verbose output about tags, branches or remotes
+	tags = tag -l
+	br = branch -a
+	remotes = remote -v
+
+        # Remove merged branches
         cleanup = "!git branch --merged | grep -v -P '^\\*|master|develop' | xargs -n1 -r git branch -d"
-[color]
-        # Enable colors in color-supporting terminals
-        ui = auto
+
+        # Remove branches that have already been merged with master
+	# a.k.a. ‘delete merged’
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p"
+
+        unreleased = "!f() { git fetch --tags && git diff $(git tag | tail -n 1); }; f"
+
+[apply]
+	# Detect whitespace errors when applying a patch
+	whitespace = fix
+
 [core]
         # Global ignore file (not shared)
-        excludesfile = ~/.gitignore_global
+        excludesfile = ~/.gitignore
+
         # Convert CRLF to LF
         autocrlf = input
+
         # Paging only if necessary
         pager = less --tabs=4 -RFX
+
+[color]
+	# Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+	ui = auto
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red
+	new = green
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
 [push]
         default = simple
-[credential]
+
+[credential "https://github.com"]
+        username = florian987
         helper = cache --timeout=3600
