@@ -1,3 +1,2 @@
-# Env
-PATH=$PATH:/usr/local/lib/npm/bin
+# additional env variables
 export EDITOR='vim'
